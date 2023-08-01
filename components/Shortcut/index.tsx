@@ -12,10 +12,10 @@ const teams = [
         
     },
     {
-      team_name: 'Operations',
+      team_name: 'Tech',
       team_description:
         'Expanding into new areas.',
-      team_link: '/operations',
+      team_link: '/tech',
     },
     {
       team_name: 'Design',
@@ -200,13 +200,13 @@ function DeviceChartIcon(props) {
   )
 }
 
-export default function ShortCut(){
+export default function ShortCut({data}){
 
   return (
    
 
-     <div className="relative isolate overflow-hidden bg-white pt-14">
-            <div className="mx-auto w-full py-10">
+     <div className="relative mx-auto w-full px-6 md:w-3/4 sm:px-8 lg:px-8 py-4">
+            <div className="w-full py-10">
       
         <div className="sm:text-center">
           <h2 className="text-2xl font-black tracking-tight text-gray-900 text-left">

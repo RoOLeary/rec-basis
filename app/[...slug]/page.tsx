@@ -15,7 +15,7 @@ export async function generateMetadata(
   parent?: ResolvingMetadata
 ): Promise<Metadata> {
   // read route params
-  const slug = params.slug;
+  const slug = params.slug ?  params.slug : 'home'
   // fetch data
   let title;
   const post = await fetch(`https://picnic-dev.app/careers/wp-json/wp/v2/spc_page?slug=${slug}`).then((res) => res.json())
@@ -33,8 +33,8 @@ export async function generateMetadata(
 }
 
 
-async function getAPIData() {
-  const res = await fetch('https://picnic-dev.app/careers/wp-json/wp/v2/spc_page?slug=home', { next: { revalidate: 10 } });
+async function getAPIData(slug) {
+  const res = await fetch(`https://picnic-dev.app/careers/wp-json/wp/v2/spc_page?slug=${slug}`, { next: { revalidate: 10 } });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -44,8 +44,8 @@ async function getAPIData() {
 
 
 export default async function Page({ params, searchParams}: Props) {
-  
-  const apiContent = await getAPIData();
+  console.log(params.slug)
+  const apiContent = await getAPIData(params.slug);
   const output = apiContent.data.content ? apiContent.data.content : null;
   // console.log(output);
   const renderComps = Object.entries(output).map((o, index) => {
@@ -78,9 +78,8 @@ export default async function Page({ params, searchParams}: Props) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
-      <Hero />
+      
       Basic Page. Slug/instance: <code>{`${slug}`}</code>
-      <TextMedia />  
     </main>
   )
 }

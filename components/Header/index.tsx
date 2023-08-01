@@ -14,9 +14,7 @@ type headerProps = {
 const Header = ({ header, locales, currentLocale}:headerProps ) => {
     
     const router = usePathname()
-    const slug = "about";
-    console.log(router);
-
+    const slug = "home"
     return(
         <header className="header block relative md:px-20 pl-6 bg-white">
             <div className="relative w-full flex justify-between mx-auto max-w-7xl md:px-4">
@@ -25,6 +23,7 @@ const Header = ({ header, locales, currentLocale}:headerProps ) => {
                         <Image className='my-5 rounded ' src={'../assets/img/logo.svg'} alt={'logo'} width={48} height={48} />
                     </Link>
                 </div>
+                
                 <div className="flex flex-row items-center max-md:hidden">
                     <nav className="flex items-center text-white">
                         <Link href={`/${slug}` } className='prose text-black prose-PicnicText mx-2' prefetch={false}>
@@ -42,12 +41,14 @@ const Header = ({ header, locales, currentLocale}:headerProps ) => {
                         <Link href={`/de` } className='prose text-black prose-PicnicText mx-2' prefetch={false}>
                             <p>LANG</p>
                         </Link>
+                        {/* Button should be a styled link */}
                         <Link href={`/jobs` } className='bg-greenish text-white rounded rounded-full mx-2 px-4 py-2' prefetch={false}>
                             <p>All jobs</p>
                         </Link>
                     </nav>
                 </div>
                 {/* Mobile Navigation */}
+                {/* Can also be broken out into a sub-component */}
                 <div className="sm:hidden md:visible lg:visible xl:visible 2xl:visible z-10 float-right">
                     <input type="checkbox" className="peer hidden" id="sidebar-collapse"/>
                     <label className="bg-transparent border-none m-[14px] z-10 absolute top-2 right-0 text-4xl group" htmlFor="sidebar-collapse">
@@ -60,34 +61,46 @@ const Header = ({ header, locales, currentLocale}:headerProps ) => {
                         </div>
                     </label>
                     <aside className="fixed top-0 bg-white w-full h-full -right-full peer-checked:right-0 ease-out delay-150 duration-300">
-                        <div className="pl-6">
-                            <img className="my-5 rounded transition-all duration-300 ease-in-out" src={'../assets/img/logo.svg'} alt="picnic-logo" width={48} height={48}/>
-                        </div>
+                        
                         <div className='pt-4 pl-6 list-none text-xl space-y-10'>
-                            
-                            
-                        <Link href={`/jobs` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
-                            <p>Jobs</p>
-                        </Link>
-                        <Link href={`/teams` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
-                            <p>Teams</p>
-                        </Link>
-                        <Link href={`/cities/amsterdam` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
-                            <p>Cities</p>
-                        </Link>
-                        <Link href={`/contact` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
-                            <p>Contact</p>
-                        </Link>
-                            
-                            
-                            {/* {
-                                links?.map((link, index ) => (
-                                    <Link key={index} href={link.type == 'page' ? `/${router.basePath}/${currentLocale}/${link.href}` : link.href } className='prose text-black prose-PicnicText mx-1' prefetch={false}>
-                                        <p>{link.label}</p>
-                                    </Link>
-                                ))
-                            } */}
-                          
+                        
+                            <Link href={`/jobs` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
+                                <p>Jobs</p>
+                            </Link>
+                            <Link href={`/teams` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
+                                <p>Teams</p>
+                            </Link>
+                            <Link href={`/cities/amsterdam` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
+                                <p>Cities</p>
+                                <ul>
+                                    <li>SubNav</li>
+                                    <li>SubNav</li>
+                                    <li>SubNav
+
+                                        <ul>
+                                            <li>Sub Sub Nav</li>
+                                            <li>Sub Sub Nav</li>
+                                            <li>Sub Sub Nav</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </Link>
+                            <Link href={`/contact` } className='prose text-black prose-PicnicText mx-1 text-black' prefetch={false}>
+                                <p>Contact</p>
+                                <ul className="hid">
+                                    <li>SubNav</li>
+                                    <li>SubNav</li>
+                                    <li>SubNav
+                                    <li>SubNav
+                                        <ul>
+                                            <li>Sub Sub Nav</li>
+                                            <li>Sub Sub Nav</li>
+                                            <li>Sub Sub Nav</li>
+                                        </ul>
+                                    </li>
+                                    </li>
+                                </ul>
+                            </Link>
                         </div>
                     </aside>
                 </div>

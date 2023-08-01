@@ -42,6 +42,7 @@ export const metadata: Metadata = {
 
 
 async function getAPIData(slug) {
+    
     const res = await fetch(`https://picnic-dev.app/careers/wp-json/wp/v2/spc_page?slug=${slug}`, { next: { revalidate: 10 } });
     if (!res.ok) {
         throw new Error('Failed to fetch data');
@@ -57,22 +58,23 @@ export default async function Page({ params, searchParams}: Props) {
     
     const { type, data } = o[1];
     switch (type) {
-      case 'text':
+      case 'row':
         return (
-          <Hero key={index} type={type} name={type} data={data} />
+          <Hero key={index} type={type} name={type} data={o[1].data} />
       );
       case 'calculator':
         return (
-          <Shortcut key={index} type={type} name={type} data={data} />
+          <Shortcut key={index} type={type} name={type} data={o[1].data} />
       );
-      case 'row':
+    
+      case 'text':
         return (
           <Component key={index} type={type} name={type} data={data} />
       );
   
       default:
         return (
-            <></>
+            <>Component not found</>
         );
       }
       
@@ -81,9 +83,8 @@ export default async function Page({ params, searchParams}: Props) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
-      <Hero />
-      Basic Page
-      <TextMedia />  
+      {/* {renderComps} */}
+      <Shortcut />
     </main>
   )
 }
